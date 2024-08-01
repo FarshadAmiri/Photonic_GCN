@@ -1,1 +1,1 @@
-# Photonic_GNN
+# Photonic_GCN
