@@ -50,3 +50,29 @@ edges_table = {"N69" : ["N70"] ,
                "N77" : ["N76", "N78", "N64", "N63", "N62"],
                "N49" : ["N48", "N62", "N63", "N64", "N50"],
                 }
+
+
+nodes_groups = { "g1": ["N41", "N42", "N43", "N44", "N45", "N46", "N69", "N70", "N71", "N72", "N73", "N74", "N54", "N55", "N56", "N57", "N58", "N59", "N82", "N83", "N84", "N85", "N86", "N87"],
+                 "g2": ["N33", "N34", "N94", "N95"],
+                 "g3": ["N60"],
+                 "g4": ["N64", "N78" , "N50"],
+                 "g5": ['N75', 'N76', 'N77', 'N61', 'N62', 'N63', 'N47', 'N48', 'N49', 'N51', 'N52', 'N53', 'N65', 'N66', 'N67', 'N79', 'N80', 'N81'],
+                 "g6": ["N68"]
+                }
+
+
+def convert_to_state_gcn(edges_table, nodes_groups, groups_states):
+
+    node_names = list(edges_table.keys())
+    nodes_features = dict() 
+
+    for group in nodes_groups.keys():
+        for node in nodes_groups[group]:
+            nodes_features[node] = groups_states[group]
+
+    nodes_state = []
+    for node in node_names:
+        nodes_state.append(nodes_features[node])
+
+    state_gcn = np.array(nodes_state, dtype=np.float32)
+    return state_gcn
